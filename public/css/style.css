@@ -45,6 +45,12 @@ a { color: inherit; text-decoration: none; }
 ul, ol { list-style: none; }
 button { font: inherit; cursor: pointer; }
 input, select, textarea { font: inherit; }
+:where(.grid-6, .grid-3, .timeline, .confiance, .reservation-inner, .reservation-form, .footer-top, .video-grid, .conseils-grid) > * {
+  min-width: 0;
+}
+:where(p, h1, h2, h3, h4, li, a, span) {
+  overflow-wrap: anywhere;
+}
 :focus-visible { outline: 2px solid var(--vert-bouquet); outline-offset: 3px; }
 
 .wrap {
@@ -631,6 +637,8 @@ input, select, textarea { font: inherit; }
 .form-row-full { grid-column: 1 / -1; }
 .form-row label { font-size: 0.82rem; font-weight: 600; color: var(--charcoal); }
 .form-row input, .form-row select, .form-row textarea {
+  width: 100%;
+  min-width: 0;
   padding: 12px 14px;
   border: 1px solid var(--bordure);
   border-radius: var(--rayon);
@@ -743,6 +751,7 @@ input, select, textarea { font: inherit; }
 }
 
 @media (max-width: 780px) {
+  .wrap { padding-inline: 18px; }
   .top-bar-inner { justify-content: center; text-align: center; }
   .nav-toggle { display: flex; }
   .site-nav {
@@ -757,24 +766,35 @@ input, select, textarea { font: inherit; }
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.3s ease;
+    z-index: 5;
   }
   .site-nav.open { max-height: 420px; }
   .site-nav a { width: 100%; padding: 14px 24px; border-bottom: 1px solid var(--bordure); }
   .header-cta .btn { display: none; }
 
+  .brand-script { font-size: 1.75rem; }
+  .header-inner { gap: 12px; }
   .hero { min-height: 520px; }
+  .hero-inner { padding-block: 64px; }
   .grid-6 { grid-template-columns: 1fr 1fr; }
   .grid-3 { grid-template-columns: 1fr; }
   .timeline { grid-template-columns: 1fr 1fr; }
   .reservation-inner { grid-template-columns: 1fr; }
   .reservation-form { grid-template-columns: 1fr; }
+  .reservation-form, .avis-form-wrap { padding: 22px 18px; }
   .cta-bandeau-inner { flex-direction: column; text-align: center; }
+  .cta-text { width: 100%; align-items: flex-start; text-align: left; }
+  .cta-text > div { min-width: 0; }
+  .cta-bandeau-inner > .btn { width: 100%; justify-content: center; }
   .footer-top { grid-template-columns: 1fr; padding-bottom: 20px; }
   .footer-bottom { flex-direction: column; text-align: center; }
   .whatsapp-float { right: 16px; bottom: 16px; width: 50px; height: 50px; }
 }
 
 @media (max-width: 480px) {
+  .section { padding: 64px 0; }
+  .btn { width: 100%; justify-content: center; padding-inline: 18px; }
+  .hero-actions { width: 100%; }
   .grid-6 { grid-template-columns: 1fr; }
   .timeline { grid-template-columns: 1fr; }
 }
