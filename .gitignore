@@ -1,0 +1,21 @@
+# Dépendances (régénérées avec "npm install", ne jamais les versionner)
+node_modules/
+
+# Variables d'environnement (contient des secrets : mot de passe admin, clé JWT)
+.env
+
+# Clé de récupération du compte admin (générée automatiquement, à garder privée)
+CLE_DE_RECUPERATION.txt
+
+# Base de données locale (générée automatiquement au démarrage du serveur)
+database.sqlite
+database.sqlite-shm
+database.sqlite-wal
+
+# Photos uploadées localement (à gérer séparément selon ton hébergement)
+uploads/*
+!uploads/.gitkeep
+
+# Fichiers système
+.DS_Store
+Thumbs.db

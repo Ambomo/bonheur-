@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Espace administrateur — Zola Event</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/admin.css">
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body class="admin-body">
+
+<!-- Écran de connexion -->
+<section id="loginScreen" class="login-screen">
+  <form id="loginForm" class="login-card" novalidate>
+    <p class="eyebrow">Zola Event</p>
+    <h1>Espace administrateur</h1>
+    <p class="login-sub">Connecte-toi avec le mot de passe défini pour ce site.</p>
+    <label for="motDePasse">Mot de passe</label>
+    <div class="password-field">
+      <input type="password" id="motDePasse" name="motDePasse" required autocomplete="current-password">
+      <button type="button" class="password-toggle" id="togglePassword" aria-label="Afficher le mot de passe">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+      </button>
+    </div>
+    <button type="submit" class="btn btn-primary">Se connecter</button>
+    <button type="button" id="motDePasseOublieBtn" class="link-btn" style="margin-top:14px;">Mot de passe oublié ?</button>
+    <p class="form-feedback" id="loginFeedback" role="status" aria-live="polite"></p>
+
+    <div id="googleSignInWrap" class="google-signin-wrap" hidden>
+      <div class="login-divider"><span>ou</span></div>
+      <div id="googleSignInButton"></div>
+    </div>
+  </form>
+
+  <!-- Formulaire de récupération (caché par défaut) -->
+  <form id="recuperationForm" class="login-card" novalidate hidden>
+    <p class="eyebrow">Zola Event</p>
+    <h1>Mot de passe oublié</h1>
+    <p class="login-sub">Renseigne la clé de récupération générée lors du premier démarrage du serveur (fichier <code>CLE_DE_RECUPERATION.txt</code>, ou affichée dans le terminal).</p>
+    <label for="cleRecuperation">Clé de récupération</label>
+    <input type="text" id="cleRecuperation" placeholder="XXXX-XXXX-XXXX-XXXX" required style="margin-bottom:18px;">
+    <label for="nouveauMotDePasse">Nouveau mot de passe</label>
+    <input type="password" id="nouveauMotDePasse" required minlength="6" style="margin-bottom:18px;">
+    <button type="submit" class="btn btn-primary">Réinitialiser le mot de passe</button>
+    <button type="button" id="annulerRecuperationBtn" class="link-btn" style="margin-top:14px;">Retour à la connexion</button>
+    <p class="form-feedback" id="recuperationFeedback" role="status" aria-live="polite"></p>
+  </form>
+</section>
+
+<!-- Tableau de bord (affiché après connexion) -->
+<div id="dashboard" class="dashboard" hidden>
+  <header class="admin-header">
+    <div class="wrap admin-header-inner">
+      <a href="index.html" class="brand"><span class="brand-mark">♡</span> Zola Event — Admin</a>
+      <button id="logoutBtn" class="btn btn-ghost btn-small">Se déconnecter</button>
+    </div>
+  </header>
+
+  <nav class="admin-tabs wrap">
+    <button class="tab-btn active" data-tab="reservations">Réservations</button>
+    <button class="tab-btn" data-tab="clients">Clients</button>
+    <button class="tab-btn" data-tab="galerie">Galerie photo</button>
+    <button class="tab-btn" data-tab="videos">Vidéos</button>
+    <button class="tab-btn" data-tab="avis">Avis clients</button>
+    <button class="tab-btn" data-tab="conseils">Conseils</button>
+    <button class="tab-btn" data-tab="securite">Sécurité</button>
+  </nav>
+
+  <main class="wrap admin-main">
+
+    <!-- RESERVATIONS -->
+    <section id="tab-reservations" class="tab-panel">
+      <h2 class="section-title-sm">Demandes de réservation</h2>
+      <div class="table-wrap">
+        <table class="admin-table" id="reservationsTable">
+          <thead>
+            <tr>
+              <th>Client</th><th>Événement</th><th>Date</th><th>Invités</th><th>Statut</th><th>Actions</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <p class="empty-msg" id="reservationsEmpty" hidden>Aucune réservation pour le moment.</p>
+    </section>
+
+    <!-- CLIENTS -->
+    <section id="tab-clients" class="tab-panel" hidden>
+      <h2 class="section-title-sm">Clients enregistrés</h2>
+      <div class="table-wrap">
+        <table class="admin-table" id="clientsTable">
+          <thead>
+            <tr><th>Nom</th><th>Email</th><th>Téléphone</th><th>Réservations</th><th>Actions</th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <p class="empty-msg" id="clientsEmpty" hidden>Aucun client enregistré pour le moment.</p>
+    </section>
+
+    <!-- GALERIE -->
+    <section id="tab-galerie" class="tab-panel" hidden>
+      <h2 class="section-title-sm">Gérer la galerie photo</h2>
+      <form id="imageForm" class="admin-form" enctype="multipart/form-data">
+        <div class="form-row">
+          <label for="imageFile">Fichier image (JPEG, PNG, WEBP, GIF — 8 Mo max)</label>
+          <input type="file" id="imageFile" name="image" accept="image/*" required>
+        </div>
+        <div class="form-row">
+          <label for="imageTitre">Titre</label>
+          <input type="text" id="imageTitre" name="titre" placeholder="Ex: Décoration florale, salle Le Jardin">
+        </div>
+        <div class="form-row form-row-full">
+          <label for="imageDescription">Description</label>
+          <textarea id="imageDescription" name="description" rows="2"></textarea>
+        </div>
+        <div class="form-row form-row-full">
+          <button type="submit" class="btn btn-primary" id="imageSubmitBtn">Ajouter à la galerie</button>
+          <p class="form-feedback" id="imageFeedback" role="status" aria-live="polite"></p>
+        </div>
+      </form>
+
+      <div class="admin-gallery-grid" id="adminGalleryGrid"></div>
+      <p class="empty-msg" id="adminGalleryEmpty" hidden>Aucune image dans la galerie.</p>
+    </section>
+
+    <!-- CONSEILS -->
+    <section id="tab-conseils" class="tab-panel" hidden>
+      <h2 class="section-title-sm">Gérer les conseils</h2>
+      <form id="conseilForm" class="admin-form">
+        <input type="hidden" id="conseilId" value="">
+        <div class="form-row">
+          <label for="conseilTitre">Titre *</label>
+          <input type="text" id="conseilTitre" required>
+        </div>
+        <div class="form-row">
+          <label for="conseilCategorie">Catégorie</label>
+          <input type="text" id="conseilCategorie" placeholder="Ex: Budget, Décoration, Traiteur…">
+        </div>
+        <div class="form-row form-row-full">
+          <label for="conseilImage">URL image (optionnel)</label>
+          <input type="url" id="conseilImage" placeholder="https://…">
+        </div>
+        <div class="form-row form-row-full">
+          <label for="conseilContenu">Contenu *</label>
+          <textarea id="conseilContenu" rows="4" required></textarea>
+        </div>
+        <div class="form-row form-row-full">
+          <button type="submit" class="btn btn-primary" id="conseilSubmitBtn">Publier le conseil</button>
+          <button type="button" class="btn btn-ghost" id="conseilCancelBtn" hidden>Annuler la modification</button>
+          <p class="form-feedback" id="conseilFeedback" role="status" aria-live="polite"></p>
+        </div>
+      </form>
+
+      <div class="admin-conseils-list" id="adminConseilsList"></div>
+    </section>
+
+    <!-- VIDEOS -->
+    <section id="tab-videos" class="tab-panel" hidden>
+      <h2 class="section-title-sm">Gérer les vidéos (réalisations)</h2>
+      <form id="videoForm" class="admin-form">
+        <div class="form-row">
+          <label for="videoTitre">Titre *</label>
+          <input type="text" id="videoTitre" required>
+        </div>
+        <div class="form-row">
+          <label for="videoUrl">Lien YouTube *</label>
+          <input type="url" id="videoUrl" placeholder="https://youtube.com/watch?v=…" required>
+        </div>
+        <div class="form-row form-row-full">
+          <label for="videoDescription">Description</label>
+          <textarea id="videoDescription" rows="2"></textarea>
+        </div>
+        <div class="form-row form-row-full">
+          <button type="submit" class="btn btn-primary" id="videoSubmitBtn">Ajouter la vidéo</button>
+          <p class="form-feedback" id="videoFeedback" role="status" aria-live="polite"></p>
+        </div>
+      </form>
+
+      <div class="admin-video-list" id="adminVideoList"></div>
+      <p class="empty-msg" id="adminVideoEmpty" hidden>Aucune vidéo pour le moment.</p>
+    </section>
+
+    <!-- AVIS CLIENTS -->
+    <section id="tab-avis" class="tab-panel" hidden>
+      <h2 class="section-title-sm">Modérer les avis clients</h2>
+      <form id="avisAdminForm" class="admin-form">
+        <div class="form-row">
+          <label for="avisAdminNom">Nom du client *</label>
+          <input type="text" id="avisAdminNom" required>
+        </div>
+        <div class="form-row">
+          <label>Note *</label>
+          <div class="etoiles-input" id="avisAdminEtoiles">
+            <button type="button" data-valeur="1" aria-label="1 étoile"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.6 4.3L18.4 21 12 16.8 5.6 21l2-7.7L2 9h7z"/></svg></button>
+            <button type="button" data-valeur="2" aria-label="2 étoiles"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.6 4.3L18.4 21 12 16.8 5.6 21l2-7.7L2 9h7z"/></svg></button>
+            <button type="button" data-valeur="3" aria-label="3 étoiles"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.6 4.3L18.4 21 12 16.8 5.6 21l2-7.7L2 9h7z"/></svg></button>
+            <button type="button" data-valeur="4" aria-label="4 étoiles"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.6 4.3L18.4 21 12 16.8 5.6 21l2-7.7L2 9h7z"/></svg></button>
+            <button type="button" data-valeur="5" aria-label="5 étoiles"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.6 4.3L18.4 21 12 16.8 5.6 21l2-7.7L2 9h7z"/></svg></button>
+          </div>
+          <input type="hidden" id="avisAdminNote" value="0">
+        </div>
+        <div class="form-row form-row-full">
+          <label for="avisAdminCommentaire">Commentaire *</label>
+          <textarea id="avisAdminCommentaire" rows="3" required></textarea>
+        </div>
+        <div class="form-row form-row-full">
+          <button type="submit" class="btn btn-primary" id="avisAdminSubmitBtn">Publier cet avis</button>
+          <p class="form-feedback" id="avisAdminFeedback" role="status" aria-live="polite"></p>
+        </div>
+      </form>
+
+      <div class="admin-avis-list" id="adminAvisList"></div>
+      <p class="empty-msg" id="adminAvisEmpty" hidden>Aucun avis pour le moment.</p>
+    </section>
+
+    <!-- SECURITE -->
+    <section id="tab-securite" class="tab-panel" hidden>
+      <h2 class="section-title-sm">Sécurité du compte administrateur</h2>
+
+      <form id="changerMdpForm" class="admin-form">
+        <div class="form-row">
+          <label for="mdpActuel">Mot de passe actuel *</label>
+          <input type="password" id="mdpActuel" required>
+        </div>
+        <div class="form-row">
+          <label for="mdpNouveau">Nouveau mot de passe *</label>
+          <input type="password" id="mdpNouveau" required minlength="6">
+        </div>
+        <div class="form-row form-row-full">
+          <button type="submit" class="btn btn-primary" id="changerMdpBtn">Changer le mot de passe</button>
+          <p class="form-feedback" id="changerMdpFeedback" role="status" aria-live="polite"></p>
+        </div>
+      </form>
+
+      <div class="avis-form-wrap" style="margin-top:24px;">
+        <h3 style="margin-bottom:8px;">À propos de la clé de récupération</h3>
+        <p class="section-lead" style="margin-bottom:0;">
+          Ta clé de récupération a été générée au premier démarrage du serveur et enregistrée dans le fichier
+          <code>CLE_DE_RECUPERATION.txt</code> à la racine du projet. Garde-la précieusement : elle seule permet
+          de réinitialiser le mot de passe en cas d'oubli. Chaque utilisation de cette clé en génère automatiquement
+          une nouvelle (l'ancienne devient invalide) — pense à noter la nouvelle clé affichée à ce moment-là.
+        </p>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>

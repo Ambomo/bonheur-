@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zola Event</title>
+<meta name="description" content="Agence de wedding planning : conseils, réalisations et réservation de consultation pour organiser votre mariage sereinement.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="accueil">
+
+<div id="site-header-mount"></div>
+
+<main>
+
+  <!-- HERO avec défilement d'images dynamique -->
+  <section class="hero">
+    <div class="hero-slides" id="heroSlides"></div>
+    <div class="hero-dots" id="heroDots"></div>
+    <div class="wrap hero-inner">
+      <p class="eyebrow">Nous organisons</p>
+      <h1 class="hero-title">Le plus beau jour<span class="hero-title-script">de votre vie ♡</span></h1>
+      <p class="hero-sub">De la planification à la réalisation, nous créons des mariages uniques, élégants et inoubliables, à votre image.</p>
+      <div class="hero-actions">
+        <a href="services.html" class="btn btn-primary">Nos services</a>
+        <a href="contact.html" class="btn btn-light">Nous contacter</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES (aperçu) -->
+  <section id="services" class="section services center">
+    <div class="wrap">
+      <p class="eyebrow">Nos prestations</p>
+      <h2 class="section-title">Un accompagnement sur-mesure</h2>
+      <div class="title-divider"></div>
+      <div class="grid-6">
+        <article class="card">
+          <span class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="9" cy="15" r="5"/><circle cx="15" cy="15" r="5"/><path d="M9 10V7l3-4 3 3v4"/></svg></span>
+          <h3>Planification complète</h3>
+          <p>Nous gérons chaque détail de A à Z pour un mariage sans stress.</p>
+        </article>
+        <article class="card">
+          <span class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 21s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12Z"/><circle cx="12" cy="9" r="2.4"/></svg></span>
+          <h3>Recherche de lieu</h3>
+          <p>Nous vous aidons à trouver le lieu parfait selon vos envies et votre budget.</p>
+        </article>
+        <article class="card">
+          <span class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 3c1 2-1 3-1 5a3 3 0 1 0 3 3c2 0 3-2 5-1-1 2-3 2-3 4a4 4 0 1 1-8 0c0-2-2-2-3-4 2-1 3 1 5 1a3 3 0 0 0 3-3c0-2-2-3-1-5Z"/><path d="M12 15v6"/></svg></span>
+          <h3>Décoration &amp; Design</h3>
+          <p>Une décoration unique et élégante qui raconte votre histoire.</p>
+        </article>
+        <article class="card">
+          <span class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7 10 4h4l2 3"/><circle cx="12" cy="13.5" r="3.5"/></svg></span>
+          <h3>Prestataires de confiance</h3>
+          <p>Nous collaborons avec les meilleurs prestataires pour garantir l'excellence.</p>
+        </article>
+        <article class="card">
+          <span class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 3h6v3H9zM8 11h8M8 15h5"/></svg></span>
+          <h3>Gestion du jour J</h3>
+          <p>Coordination complète pour que vous profitiez pleinement de chaque instant.</p>
+        </article>
+        <article class="card">
+          <span class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 21s-8-5-8-11a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 6-8 11-8 11a1 1 0 0 1-2 0Z"/></svg></span>
+          <h3>Lune de miel</h3>
+          <p>Organisation de votre voyage de noces pour un début de vie magique.</p>
+        </article>
+      </div>
+      <div class="gallery-cta" style="margin-top:36px;">
+        <a href="services.html" class="btn btn-ghost">Voir tous nos services</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARCOURS / SIGNATURE TIMELINE -->
+  <section id="parcours" class="section processus center">
+    <div class="wrap">
+      <p class="eyebrow">Notre processus</p>
+      <h2 class="section-title">Une organisation en 6 étapes clés</h2>
+      <div class="title-divider"></div>
+      <ol class="timeline">
+        <li class="timeline-step">
+          <span class="step-index"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h11a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H9l-4 4v-4H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z"/></svg></span>
+          <h3>Premier échange</h3>
+          <p>Nous apprenons à vous connaître et comprenons vos attentes.</p>
+        </li>
+        <li class="timeline-step">
+          <span class="step-index"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 3h9l3 3v15H6z"/><path d="M9 9h6M9 13h6M9 17h4"/></svg></span>
+          <h3>Proposition</h3>
+          <p>Nous vous envoyons une proposition personnalisée et un devis détaillé.</p>
+        </li>
+        <li class="timeline-step">
+          <span class="step-index"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></span>
+          <h3>Planification</h3>
+          <p>Nous planifions chaque détail et sélectionnons les meilleurs prestataires.</p>
+        </li>
+        <li class="timeline-step">
+          <span class="step-index"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 20 15 9l3 3L7 23H4v-3Z"/><path d="m14 6 3-3 4 4-3 3"/></svg></span>
+          <h3>Conception</h3>
+          <p>Nous créons le design et l'ambiance de votre mariage.</p>
+        </li>
+        <li class="timeline-step">
+          <span class="step-index"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="m8 12.5 2.5 2.5L16 9.5"/></svg></span>
+          <h3>Coordination</h3>
+          <p>Nous coordonnons tous les prestataires et les préparatifs jusqu'au jour J.</p>
+        </li>
+        <li class="timeline-step">
+          <span class="step-index"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 21s-8-5-8-11a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 6-8 11-8 11a1 1 0 0 1-2 0Z"/></svg></span>
+          <h3>Jour J</h3>
+          <p>Nous gérons l'événement pendant que vous vivez des moments inoubliables.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- GALERIE (aperçu) -->
+  <section id="galerie" class="section galerie center">
+    <div class="wrap">
+      <p class="eyebrow">Nos réalisations</p>
+      <h2 class="section-title">Des mariages uniques &amp; inoubliables</h2>
+      <div class="title-divider"></div>
+      <div class="gallery-grid" id="galleryGrid" data-limit="6">
+        <p class="gallery-empty" id="galleryEmpty">La galerie est vide pour le moment. Ajoutez des photos depuis l'espace admin.</p>
+      </div>
+      <div class="gallery-cta">
+        <a href="realisations.html" class="btn btn-ghost">Voir toutes nos réalisations</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONFIANCE : témoignages + pourquoi nous choisir + citation -->
+  <section class="section">
+    <div class="wrap">
+      <div class="confiance">
+        <div class="temoignage-eyebrow-wrap">
+          <p class="eyebrow">Ils nous font confiance</p>
+          <h2 class="section-title" style="font-size:1.5rem;">Leurs mots, notre plus belle récompense</h2>
+          <div class="title-divider" style="margin-left:0;"></div>
+          <div class="temoignage-card" id="temoignageCard">
+            <p class="quote-text" id="temoignageTexte">Les avis publiés s'afficheront ici.</p>
+            <div class="temoignage-auteur">
+              <span class="temoignage-avatar" id="temoignageInitiale">?</span>
+              <div>
+                <strong id="temoignageNom">—</strong>
+                <span id="temoignageEtoiles"></span>
+              </div>
+            </div>
+            <div class="temoignage-nav">
+              <button id="temoignagePrev" aria-label="Avis précédent">‹</button>
+              <button id="temoignageNext" aria-label="Avis suivant">›</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="pourquoi">
+          <h3>Pourquoi nous choisir ?</h3>
+          <ul class="pourquoi-list">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="m8 12.5 2.5 2.5L16 9.5"/></svg> Écoute &amp; accompagnement personnalisé</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="m8 12.5 2.5 2.5L16 9.5"/></svg> Réseau de prestataires de confiance</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="m8 12.5 2.5 2.5L16 9.5"/></svg> Créativité &amp; sens du détail</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="m8 12.5 2.5 2.5L16 9.5"/></svg> Respect du budget</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="m8 12.5 2.5 2.5L16 9.5"/></svg> Passion &amp; professionnalisme</li>
+          </ul>
+        </div>
+
+        <div class="citation-card">
+          <div class="citation-body">
+            <p>Chaque histoire d'amour est unique, chaque mariage doit l'être aussi.</p>
+            <span>Zola Event</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONSEILS (aperçu) -->
+  <section id="conseils" class="section conseils center">
+    <div class="wrap">
+      <p class="eyebrow">Ressources</p>
+      <h2 class="section-title">Conseils de nos wedding planners</h2>
+      <div class="title-divider"></div>
+      <div class="conseils-grid" id="conseilsGrid" data-limit="3">
+        <p class="conseils-empty" id="conseilsEmpty">Aucun conseil publié pour le moment.</p>
+      </div>
+      <div class="gallery-cta" style="margin-top:36px;">
+        <a href="conseils.html" class="btn btn-ghost">Voir tous les conseils</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BANDEAU -->
+  <section class="cta-bandeau">
+    <div class="wrap cta-bandeau-inner">
+      <div class="cta-text">
+        <span class="cta-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/><path d="m9 15 2 2 4-4"/></svg></span>
+        <div>
+          <h3>Prêt(e) à commencer l'organisation de votre mariage ?</h3>
+          <p>Contactez-nous dès aujourd'hui pour un premier échange gratuit.</p>
+        </div>
+      </div>
+      <a href="contact.html" class="btn btn-light">Prendre rendez-vous</a>
+    </div>
+  </section>
+
+</main>
+
+<div id="site-footer-mount"></div>
+
+<script src="js/config.js"></script>
+<script src="js/layout.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
